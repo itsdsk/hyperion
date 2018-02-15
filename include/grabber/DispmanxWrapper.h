@@ -79,9 +79,6 @@ public slots:
 signals:
 	void emitImage(int priority, const Image<ColorRgb> & image, const int timeout_ms);
 
-	// arduino
-	std::ofstream arduino;
-
 private:
 	/// The update rate [Hz]
 	const int _updateInterval_ms;
@@ -108,4 +105,7 @@ private:
 
 	// forwarding enabled
 	bool _forward;
+
+	// arduino
+	std::ofstream arduino;
 };
