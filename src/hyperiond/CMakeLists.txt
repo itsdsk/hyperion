@@ -19,6 +19,10 @@ if (ENABLE_DISPMANX)
 	target_link_libraries(hyperiond dispmanx-grabber)
 endif ()
 
+if (ENABLE_DISKMANX)
+	target_link_libraries(hyperiond dispmanx-grabber)
+endif ()
+
 if (ENABLE_FB)
 	target_link_libraries(hyperiond framebuffer-grabber)
 endif ()
