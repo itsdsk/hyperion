@@ -18,6 +18,10 @@ if(ENABLE_DISPMANX)
 	add_subdirectory(hyperion-dispmanx)
 endif()
 
+if(ENABLE_DISKMANX)
+	add_subdirectory(hyperion-diskmanx)
+endif()
+
 if(ENABLE_FB)
 	add_subdirectory(hyperion-framebuffer)
 endif()

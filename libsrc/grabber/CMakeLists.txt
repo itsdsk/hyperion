@@ -6,6 +6,10 @@ if (ENABLE_DISPMANX)
 	add_subdirectory(dispmanx)
 endif (ENABLE_DISPMANX)
 
+if (ENABLE_DISKMANX)
+	add_subdirectory(diskmanx)
+endif (ENABLE_DISKMANX)
+
 if (ENABLE_FB)
 	add_subdirectory(framebuffer)
 endif (ENABLE_FB)
