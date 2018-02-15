@@ -36,6 +36,11 @@ DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHe
 	std::system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts");
 	//Opens the tty connection as an ofstream
 	arduino.open("/dev/ttyACM0");
+	// set header bytes
+	serialHeader[0] = '\xde';
+	serialHeader[1] = '\xad';
+	serialHeader[2] = '\xbe';
+	serialHeader[3] = '\xef';
 }
 
 DispmanxWrapper::~DispmanxWrapper()
@@ -66,7 +71,15 @@ void DispmanxWrapper::action()
 		emit emitImage(_priority, image_rgb, _timeout_ms);
 	}
     
-	arduino << "hello world";
+	// arduino send led data test
+	for(int i=0; i<4; i++){
+		arduino << serialHeader[i]; // send header
+	}
+	for(int i=0; i<32; i++){
+		arduino << '\xff'; // channel 1
+		arduino << '\x00'; // 2
+		arduino << '\x00'; // 3
+	}
 
 	//_processor->process(_image, _ledColors);
 	//_hyperion->setColors(_priority, _ledColors, _timeout_ms);

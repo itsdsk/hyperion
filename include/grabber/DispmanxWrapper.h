@@ -108,4 +108,5 @@ private:
 
 	// arduino
 	std::ofstream arduino;
+	unsigned char serialHeader[4];
 };
