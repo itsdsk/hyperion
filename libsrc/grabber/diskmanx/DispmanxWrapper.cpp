@@ -71,14 +71,22 @@ void DispmanxWrapper::action()
 		emit emitImage(_priority, image_rgb, _timeout_ms);
 	}
     
+	// get colour
+	int coordX = 96; int coordY = 54; int lengthX = 192;
+	int colourIndex = coordY*lengthX + coordX;
+	const auto& pixel = _image.memptr()[colourIndex];
+	const uint8_t pixR = uint8_t(pixel.red);
+	const uint8_t pixG = uint8_t(pixel.green);
+	const uint8_t pixB = uint8_t(pixel.blue);
+
 	// arduino send led data test
 	for(int i=0; i<4; i++){
 		arduino << serialHeader[i]; // send header
 	}
 	for(int i=0; i<32; i++){
-		arduino << '\xff'; // channel 1
-		arduino << '\x00'; // 2
-		arduino << '\x00'; // 3
+		arduino << pixR; // channel 1
+		arduino << pixG; // 2
+		arduino << pixB; // 3
 	}
 
 	//_processor->process(_image, _ledColors);
