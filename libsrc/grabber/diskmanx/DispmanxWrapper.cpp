@@ -11,6 +11,8 @@
 #include <grabber/DispmanxWrapper.h>
 #include <grabber/DispmanxFrameGrabber.h>
 
+// include QT image for screenshot test
+#include <QImage>
 
 DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHeight, const unsigned updateRate_Hz, const int priority, Hyperion * hyperion) :
 	_updateInterval_ms(1000/updateRate_Hz),
