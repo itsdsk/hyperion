@@ -22,7 +22,7 @@
 // Hyperion includes
 #include <hyperion/Hyperion.h>
 
-#ifdef ENABLE_DISPMANX
+#if defined(ENABLE_DISPMANX) || defined(ENABLE_DISKMANX)
 // Dispmanx grabber includes
 #include <grabber/DispmanxWrapper.h>
 #endif
@@ -270,7 +270,7 @@ void startNetworkServices(const Json::Value &config, Hyperion &hyperion, JsonSer
 	}
 }
 
-#ifdef ENABLE_DISPMANX
+#if defined(ENABLE_DISPMANX) || defined(ENABLE_DISKMANX)
 void startGrabberDispmanx(const Json::Value &config, Hyperion &hyperion, ProtoServer* &protoServer, XBMCVideoChecker* &xbmcVideoChecker, DispmanxWrapper* &dispmanx)
 {
 	// Construct and start the frame-grabber if the configuration is present
@@ -517,7 +517,7 @@ int main(int argc, char** argv)
 
 // ---- grabber -----
 
-#ifdef ENABLE_DISPMANX
+#if defined(ENABLE_DISPMANX) || defined(ENABLE_DISKMANX)
 	DispmanxWrapper * dispmanx = nullptr;
 	startGrabberDispmanx(config, hyperion, protoServer, xbmcVideoChecker, dispmanx);
 #else
@@ -565,6 +565,12 @@ int main(int argc, char** argv)
 		std::cerr << "ERROR: The framebuffer grabber can not be instantiated, because it has been left out from the build" << std::endl;
 	}
 #endif
+#if !defined(ENABLE_DISKMANX) && !defined(ENABLE_OSX)
+	else if (config.isMember("framegrabber"))
+	{
+		std::cerr << "ERROR: The framebuffer grabber can not be instantiated, because it has been left out from the build" << std::endl;
+	}
+#endif
 #endif
 
 #ifdef ENABLE_OSX
@@ -582,6 +588,12 @@ int main(int argc, char** argv)
 		std::cerr << "ERROR: The osx grabber can not be instantiated, because it has been left out from the build" << std::endl;
 	}
 #endif
+#if !defined(ENABLE_DISKMANX) && !defined(ENABLE_FB)
+	else if (config.isMember("framegrabber"))
+	{
+		std::cerr << "ERROR: The osx grabber can not be instantiated, because it has been left out from the build" << std::endl;
+	}
+#endif
 #endif
 
 
@@ -591,6 +603,9 @@ int main(int argc, char** argv)
 
 	// Delete all component
 #ifdef ENABLE_DISPMANX
+	delete dispmanx;
+#endif
+#ifdef ENABLE_DISKMANX
 	delete dispmanx;
 #endif
 #ifdef ENABLE_FB
