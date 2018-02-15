@@ -58,9 +58,18 @@ void DispmanxWrapper::action()
 		_image.toRgb(image_rgb);
 		emit emitImage(_priority, image_rgb, _timeout_ms);
 	}
-
-	_processor->process(_image, _ledColors);
-	_hyperion->setColors(_priority, _ledColors, _timeout_ms);
+        
+	// screenshot save test
+	std::cout << "INFO: try save screenshot" << std::endl;
+	Image<ColorRgb> testscreenshot;
+	_image.toRgb(testscreenshot);
+	QImage pngImage((const uint8_t *) testscreenshot.memptr(), testscreenshot.width(), testscreenshot.height(),
+			3*testscreenshot.width(), QImage::Format_RGB888);
+        pngImage.save("testdskScreen.png");
+	std::cout << "INFO: screenshot saved" << std::endl;
+	
+	//_processor->process(_image, _ledColors);
+	//_hyperion->setColors(_priority, _ledColors, _timeout_ms);
 }
 
 void DispmanxWrapper::stop()
