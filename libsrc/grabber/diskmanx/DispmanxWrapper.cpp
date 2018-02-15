@@ -31,6 +31,11 @@ DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHe
 
 	// Connect the QTimer to this
 	QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(action()));
+
+	//Activates the tty connection with the Arduino (ref: https://playground.arduino.cc/Interfacing/CPlusPlus)
+	std::system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts");
+	//Opens the tty connection as an ofstream
+	std::arduino.open("/dev/ttyACM0");
 }
 
 DispmanxWrapper::~DispmanxWrapper()
@@ -38,6 +43,9 @@ DispmanxWrapper::~DispmanxWrapper()
 	// Cleanup used resources (ImageProcessor and FrameGrabber)
 	delete _processor;
 	delete _frameGrabber;
+
+	// close serial connection
+	std::arduino.close();
 }
 
 void DispmanxWrapper::start()
@@ -57,7 +65,9 @@ void DispmanxWrapper::action()
 		_image.toRgb(image_rgb);
 		emit emitImage(_priority, image_rgb, _timeout_ms);
 	}
-        	
+    
+	std::arduino << "hello world";
+
 	//_processor->process(_image, _ledColors);
 	//_hyperion->setColors(_priority, _ledColors, _timeout_ms);
 }

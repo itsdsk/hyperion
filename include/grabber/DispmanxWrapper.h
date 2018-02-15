@@ -11,6 +11,11 @@
 #include <utils/GrabbingMode.h>
 #include <utils/VideoMode.h>
 
+// Arduino serial includes
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+
 // Forward class declaration
 class DispmanxFrameGrabber;
 class Hyperion;
@@ -73,6 +78,9 @@ public slots:
 
 signals:
 	void emitImage(int priority, const Image<ColorRgb> & image, const int timeout_ms);
+
+	// arduino
+	std::ofstream arduino;
 
 private:
 	/// The update rate [Hz]
