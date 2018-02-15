@@ -11,9 +11,6 @@
 #include <grabber/DispmanxWrapper.h>
 #include <grabber/DispmanxFrameGrabber.h>
 
-// include QT image for screenshot test
-#include <QImage>
-
 DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHeight, const unsigned updateRate_Hz, const int priority, Hyperion * hyperion) :
 	_updateInterval_ms(1000/updateRate_Hz),
 	_timeout_ms(2 * _updateInterval_ms),
@@ -60,16 +57,7 @@ void DispmanxWrapper::action()
 		_image.toRgb(image_rgb);
 		emit emitImage(_priority, image_rgb, _timeout_ms);
 	}
-        
-	// screenshot save test
-	std::cout << "INFO: try save screenshot" << std::endl;
-	Image<ColorRgb> testscreenshot;
-	_image.toRgb(testscreenshot);
-	QImage pngImage((const uint8_t *) testscreenshot.memptr(), testscreenshot.width(), testscreenshot.height(),
-			3*testscreenshot.width(), QImage::Format_RGB888);
-        pngImage.save("testdskScreen.png");
-	std::cout << "INFO: screenshot saved" << std::endl;
-	
+        	
 	//_processor->process(_image, _ledColors);
 	//_hyperion->setColors(_priority, _ledColors, _timeout_ms);
 }
