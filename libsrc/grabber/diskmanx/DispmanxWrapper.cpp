@@ -11,6 +11,9 @@
 #include <grabber/DispmanxWrapper.h>
 #include <grabber/DispmanxFrameGrabber.h>
 
+// STL includes
+#include <iostream>
+
 DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHeight, const unsigned updateRate_Hz, const int priority, Hyperion * hyperion) :
 	_updateInterval_ms(1000/updateRate_Hz),
 	_timeout_ms(2 * _updateInterval_ms),
@@ -88,7 +91,8 @@ void DispmanxWrapper::action()
 		arduino << pixG; // 2
 		arduino << pixB; // 3
 	}
-
+	std::cout << "DISKMANXGRABBER TEST DONE: rgb(" << pixR <<","<< pixG <<","<< pixB <<")"<< std::endl;
+	
 	//_processor->process(_image, _ledColors);
 	//_hyperion->setColors(_priority, _ledColors, _timeout_ms);
 }
