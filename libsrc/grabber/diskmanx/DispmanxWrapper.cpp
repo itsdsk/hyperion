@@ -36,7 +36,7 @@ DispmanxWrapper::DispmanxWrapper(const unsigned grabWidth, const unsigned grabHe
 	QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(action()));
 
 	//Activates the tty connection with the Arduino (ref: https://playground.arduino.cc/Interfacing/CPlusPlus)
-	std::system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts");
+	std::system("stty -F /dev/ttyACM0 cs8 460800 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts");
 	//Opens the tty connection as an ofstream
 	arduino.open("/dev/ttyACM0");
 	// set header bytes
@@ -75,6 +75,14 @@ void DispmanxWrapper::action()
 	}
     
 	// get colour
+	for(int i=0; i<512; i++){
+		int coordX = 32; int coordY = 18; int lengthX = 64;
+		int colourIndex = coordY*lengthX + coordX;
+		const auto& pixel = _image.memptr()[colourIndex];
+		const uint8_t pixR = uint8_t(pixel.red);
+		const uint8_t pixG = uint8_t(pixel.green);
+		const uint8_t pixB = uint8_t(pixel.blue);
+	}
 	int coordX = 32; int coordY = 18; int lengthX = 64;
 	int colourIndex = coordY*lengthX + coordX;
 	const auto& pixel = _image.memptr()[colourIndex];
