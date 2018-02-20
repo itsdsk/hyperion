@@ -75,7 +75,7 @@ void DispmanxWrapper::action()
 	}
     
 	// get colour
-	int coordX = 96; int coordY = 54; int lengthX = 192;
+	int coordX = 32; int coordY = 18; int lengthX = 64;
 	int colourIndex = coordY*lengthX + coordX;
 	const auto& pixel = _image.memptr()[colourIndex];
 	const uint8_t pixR = uint8_t(pixel.red);
