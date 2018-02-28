@@ -258,7 +258,7 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 	else if (command == "adjustment")
 		handleAdjustmentCommand(message);
 	else if (command == "leds")
-		handleAdjustmentCommand(message);
+		handleLedsCommand(message);
 	else
 		handleNotImplemented();
 }

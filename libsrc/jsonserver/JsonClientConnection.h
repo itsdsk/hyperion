@@ -135,6 +135,11 @@ private:
 	void handleAdjustmentCommand(const Json::Value & message);
 
 	///
+	/// Handle an incoming JSON message of LED type
+	///
+	void handleLedsCommand(const Json::Value &message);
+
+	///
 	/// Handle an incoming JSON message of unknown type
 	///
 	void handleNotImplemented();
