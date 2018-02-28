@@ -257,10 +257,19 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 		handleTemperatureCommand(message);
 	else if (command == "adjustment")
 		handleAdjustmentCommand(message);
+	else if (command == "leds")
+		handleAdjustmentCommand(message);
 	else
 		handleNotImplemented();
 }
 
+void JsonClientConnection::handleLedsCommand(const Json::Value &message)
+{
+	std::cout << "Json message: " << message << std::endl;
+	std::cout << "Config message: " << _hyperion->getJsonConfig()["leds"] << std::endl;
+	sendSuccessReply();
+    _hyperion->createLedString(const Json::Value & ledsConfig, const ColorOrder::ORDER_BGR);
+}
 
 void JsonClientConnection::forwardJsonMessage(const Json::Value & message)
 {
