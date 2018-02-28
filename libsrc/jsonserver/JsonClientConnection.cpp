@@ -268,7 +268,7 @@ void JsonClientConnection::handleLedsCommand(const Json::Value &message)
 	std::cout << "Json message: " << message << std::endl;
 	std::cout << "Config message: " << _hyperion->getJsonConfig()["leds"] << std::endl;
 	sendSuccessReply();
-    _hyperion->createLedString(const Json::Value & ledsConfig, const ColorOrder::ORDER_BGR);
+    _hyperion->createLedString(ledsConfig, ColorOrder::ORDER_BGR);
 }
 
 void JsonClientConnection::forwardJsonMessage(const Json::Value & message)

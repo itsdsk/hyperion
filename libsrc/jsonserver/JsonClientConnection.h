@@ -137,7 +137,7 @@ private:
 	///
 	/// Handle an incoming JSON message of LED type
 	///
-	void handleLedsCommand(const Json::Value &message);
+	void handleLedsCommand(const Json::Value & message);
 
 	///
 	/// Handle an incoming JSON message of unknown type
