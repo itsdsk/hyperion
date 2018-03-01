@@ -241,7 +241,7 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 	}
 	
 	// test
-	std::cout << "message: " << message.asString() << std::endl;
+	std::cout << "message: " << message.toStyledString() << std::endl;
 	//
 
 	// switch over all possible commands and handle them
@@ -273,8 +273,8 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 
 void JsonClientConnection::handleLedsCommand(const Json::Value &message)
 {
-	std::cout << "Json message: " << message["leds"].asString() << std::endl;
-	std::cout << "Config message: " << _hyperion->getJsonConfig()["leds"].asString() << std::endl;
+	std::cout << "Json message: " << message["leds"].toStyledString() << std::endl;
+	std::cout << "Config message: " << _hyperion->getJsonConfig()["leds"].toStyledString() << std::endl;
     //_hyperion->createLedString(message["leds"], ColorOrder::ORDER_BRG);
 	sendSuccessReply();
 }
