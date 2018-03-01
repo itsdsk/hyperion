@@ -212,6 +212,10 @@ void JsonClientConnection::socketClosed()
 
 void JsonClientConnection::handleMessage(const std::string &messageString)
 {
+	// test
+	std::cout << "messageString: " << messageString << std::endl;
+	//
+
 	Json::Reader reader;
 	Json::Value message;
 	if (!reader.parse(messageString, message, false))
@@ -236,6 +240,10 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 		return;
 	}
 	
+	// test
+	std::cout << "message: " << message.asString() << std::endl;
+	//
+
 	// switch over all possible commands and handle them
 	if (command == "color")
 		handleColorCommand(message);
@@ -257,7 +265,7 @@ void JsonClientConnection::handleMessage(const std::string &messageString)
 		handleTemperatureCommand(message);
 	else if (command == "adjustment")
 		handleAdjustmentCommand(message);
-	else if (command == "leds")
+	else if (command == "mapping")
 		handleLedsCommand(message);
 	else
 		handleNotImplemented();
@@ -267,8 +275,8 @@ void JsonClientConnection::handleLedsCommand(const Json::Value &message)
 {
 	std::cout << "Json message: " << message["leds"].asString() << std::endl;
 	std::cout << "Config message: " << _hyperion->getJsonConfig()["leds"].asString() << std::endl;
+    //_hyperion->createLedString(message["leds"], ColorOrder::ORDER_BRG);
 	sendSuccessReply();
-    _hyperion->createLedString(message["leds"], ColorOrder::ORDER_BRG);
 }
 
 void JsonClientConnection::forwardJsonMessage(const Json::Value & message)
