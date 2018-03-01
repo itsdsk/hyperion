@@ -793,6 +793,11 @@ void Hyperion::adjustmentsUpdated()
 	update();
 }
 
+void Hyperion::mappingsUpdated()
+{
+	update();
+}
+
 void Hyperion::clear(int priority)
 {
 	if (_muxer.hasPriority(priority))

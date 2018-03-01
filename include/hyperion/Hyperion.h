@@ -201,6 +201,10 @@ public slots:
 	/// Tell Hyperion that the corrections have changed and the leds need to be updated
 	void adjustmentsUpdated();
 
+	/// Tell Hyperion that the mappings have changed and the leds need to be updated
+	void mappingsUpdated();
+
+
 	///
 	/// Clears the given priority channel. This will switch the led-colors to the colors of the next
 	/// lower priority channel (or off if no more channels are set)
