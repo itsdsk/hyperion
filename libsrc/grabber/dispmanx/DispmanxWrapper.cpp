@@ -72,7 +72,7 @@ void DispmanxWrapper::stop()
 void DispmanxWrapper::setGrabbingMode(const GrabbingMode mode)
 {
 	// add flag to disable cropping (see https://github.com/hyperion-project/hyperion/commit/f584b05de57a25bb9db9cb70822fc237b4fc3937)
-	_frameGrabber->setFlags(DISPMANX_SNAPSHOT_FILL)
+	_frameGrabber->setFlags(DISPMANX_SNAPSHOT_FILL);
 	switch (mode)
 	{
 	case GRABBINGMODE_VIDEO:
