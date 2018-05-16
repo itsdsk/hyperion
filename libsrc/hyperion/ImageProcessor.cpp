@@ -11,7 +11,7 @@ using namespace hyperion;
 //ImageProcessor::ImageProcessor(const LedString& ledString, bool enableBlackBorderDetector, uint8_t blackborderThreshold) :
 ImageProcessor::ImageProcessor(const LedString& ledString, const Json::Value & blackborderConfig) :
 	_ledString(ledString),
-	_enableBlackBorderRemoval(blackborderConfig.get("enable", true).asBool()),
+	_enableBlackBorderRemoval(false),
 	_borderProcessor(new BlackBorderProcessor(blackborderConfig) ),
 	_imageToLeds(nullptr)
 {
@@ -46,7 +46,7 @@ void ImageProcessor::setSize(const unsigned width, const unsigned height)
 
 void ImageProcessor::enableBalckBorderDetector(bool enable)
 {
-	_enableBlackBorderRemoval = enable;
+	_enableBlackBorderRemoval = false;
 }
 
 bool ImageProcessor::getScanParameters(size_t led, double &hscanBegin, double &hscanEnd, double &vscanBegin, double &vscanEnd) const
