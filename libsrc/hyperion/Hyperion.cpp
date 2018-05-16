@@ -536,11 +536,12 @@ LedString Hyperion::createLedString(const Json::Value& ledsConfig, const ColorOr
 		led.colorOrder = stringToColorOrder(ledOrderStr);
 
 		//
-		led.minX_frac = led.maxX_frac-0.001;
-		led.minY_frac = led.maxY_frac-0.001;
-		//
 		std::cout << "LEDDEVICE INFO: Led '" << led.index << " hscan min: "<< led.minX_frac << " max: " << led.maxX_frac << std::endl;
 		std::cout << "vscan min: " << led.minY_frac << " max: " << led.maxY_frac << std::endl;
+
+		//
+		led.minX_frac = led.maxX_frac-0.001;
+		led.minY_frac = led.maxY_frac-0.001;
 
 		ledString.leds().push_back(led);
 	}
